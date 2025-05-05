@@ -31,5 +31,5 @@ app.use((req, res) => {
 });
 
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor escuchando en el puerto http://localhost:${PORT}/api/home`);
+  console.log(`Servidor escuchando en el puerto :${PORT}`);
 });
