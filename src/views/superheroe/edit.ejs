@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Superhéroe</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Editar Superhéroe</h1>
+
+    <form action="/api/heroes/<%= superheroe._id %>" method="POST">
+        <label>Nombre del Superhéroe:</label>
+        <input type="text" name="nombreSuperheroe" value="<%= superheroe.nombreSuperheroe %>" required>
+    
+        <label>Nombre Real:</label>
+        <input type="text" name="nombreReal" value="<%= superheroe.nombreReal %>" required>
+    
+        <label>Edad:</label>
+        <input type="number" name="edad" value="<%= superheroe.edad %>" required>
+    
+        <label>Planeta de Origen:</label>
+        <input type="text" name="planetaOrigen" value="<%= superheroe.planetaOrigen %>" required>
+    
+        <label>Debilidad:</label>
+        <input type="text" name="debilidad" value="<%= superheroe.debilidad %>" required>
+    
+        <label for="poder">Poder</label>
+        <textarea id="poder" name="poder[]" required><%= superheroe.poder.join(', ') %></textarea>
+
+        <label>Aliado:</label>
+        <input type="text" name="aliado" value="<%= superheroe.aliado %>" required>
+    
+        <label>Enemigo:</label>
+        <input type="text" name="enemigo" value="<%= superheroe.enemigo %>" required>
+    
+        <label for="creador">Creador</label>
+        <textarea id="creador" name="creador[]" required><%= superheroe.creador.join(', ') %></textarea>
+
+
+        <button type="submit">Actualizar</button>
+    </form>
+    
+      
+    <a href="/api/heroes" class="button">Volver al Dashboard</a> <br>
+
+    <% if (errors.length > 0 ) { %>
+        <ul>
+            <% errors.forEach(function(error) { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+</body>
+</html>

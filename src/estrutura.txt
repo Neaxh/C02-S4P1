@@ -1,0 +1,41 @@
+src
+|--/config
+|    |--dbConfig.mjs
+|
+|-- /models
+|    |-- SuperHero.mjs
+|
+|-- /public
+|    |--/icons
+|    |--/images
+|    |--style.css
+|   
+|
+|-- /repositories
+|    |-- IRepository.mjs
+|    |-- SuperHeroRepository.mjs
+|
+|-- /services
+|    |-- superheroesService.mjs
+|
+|-- /controllers
+|    |-- superheroesController.mjs
+|
+|---/validation
+|    |--errorMiddleware.mjs
+|    |--validationRules.mjs
+|
+|-- /routes
+|    |--superHeroRoutes.mjs
+|
+|-- /views
+|    |-- layout.mjs
+|    |--index.ejs
+|    |-- responseView.mjs
+|    |--dashboard.ejs
+|    | /superheroes
+|       |--delete.ejs
+|       |--edit.ejs
+|       |--new.ejs
+|
+|-- app.mjs

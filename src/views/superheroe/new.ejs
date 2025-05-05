@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Superhéroe</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Crear Nuevo Superhéroe</h1>
+
+    <form action="/api/heroes" method="POST">
+        <label>Nombre del Superhéroe:</label>
+        <input type="text" name="nombreSuperheroe" required>
+    
+        <label>Nombre Real:</label>
+        <input type="text" name="nombreReal" required>
+    
+        <label>Edad:</label>
+        <input type="number" name="edad" required>
+    
+        <label>Planeta de Origen:</label>
+        <input type="text" name="planetaOrigen" required>
+    
+        <label>Debilidad:</label>
+        <input type="text" name="debilidad" required>
+    
+        <label for="poder">Poder</label>
+        <textarea id="poder" name="poder[]" required></textarea>
+
+        <label>Aliado:</label>
+        <input type="text" name="aliado" required>
+    
+        <label>Enemigo:</label>
+        <input type="text" name="enemigo" required>
+    
+        <label for="creador">Creador</label>
+        <textarea id="creador" name="creador[]" required></textarea>
+
+        <button type="submit">Crear</button>
+    </form>
+    
+    <a href="/api/heroes" class="button">Volver al Dashboard</a> <br>
+</body>
+</html>

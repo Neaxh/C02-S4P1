@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Eliminar Superhéroe</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Eliminar Superhéroe por Atributo</h1>
+            <form action="/api/heroes/deleteAttribute" method="POST">
+                <label>Nombre del Superhéroe:</label>
+                <input type="text" name="nombreSuperheroe">
+
+                <label>O Nombre Real:</label>
+                <input type="text" name="nombreReal">
+
+                <button type="submit">Eliminar</button>
+            </form>
+
+    
+    <a href="/api/heroes" class="button">Volver al Dashboard</a> <br>
+
+    <% if (errors.length > 0 ) { %>
+        <ul>
+            <% errors.forEach(error => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+</body>
+</html>
