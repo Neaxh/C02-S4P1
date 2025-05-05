@@ -106,12 +106,12 @@ export async function crearSuperheroeController(req, res) {
         });
 
         if (!superheroeCreado) {
-            return res.render("mensaje", { mensaje: "❌ Error al crear superhéroe" });
+            return res.render("mensaje", { mensaje: "Error al crear superhéroe" });
         }
 
-        res.render("mensaje", { mensaje: "✅ Superhéroe creado exitosamente" });
+        res.render("mensaje", { mensaje: "Superhéroe creado exitosamente" });
     } catch (error) {
-        res.render("mensaje", { mensaje: `❌ Error al crear: ${error.message}` });
+        res.render("mensaje", { mensaje: `Error al crear: ${error.message}` });
     }
 }
 
@@ -127,12 +127,12 @@ export async function actualizarSuperheroeController(req, res) {
         const superheroeActualizado = await actualizarSuperheroe(id, datosActualizados);
 
         if (!superheroeActualizado) {
-            return res.render("mensaje", { mensaje: "❌ Superhéroe no encontrado" });
+            return res.render("mensaje", { mensaje: "Superhéroe no encontrado" });
         }
 
-        res.render("mensaje", { mensaje: "✅ Superhéroe actualizado exitosamente" });
+        res.render("mensaje", { mensaje: "Superhéroe actualizado exitosamente" });
     } catch (error) {
-        res.render("mensaje", { mensaje: `❌ Error al actualizar: ${error.message}` });
+        res.render("mensaje", { mensaje: `Error al actualizar: ${error.message}` });
     }
 }
 
@@ -152,7 +152,7 @@ export async function eliminarSuperheroeController(req, res) {
 
         // Después de eliminar, actualizamos la vista con la nueva lista de superhéroes
         const superheroes = await obtenerTodosLosSuperheroes();  // Recuperamos la lista actualizada de superhéroes
-        res.render('dashboard', { superheroes }); // Vuelve a cargar la lista actualizada
+        res.render("mensaje", { mensaje: "Superhéroe eliminado" }); // Vuelve a cargar la lista actualizada
     } catch (error) {
         console.error("Error al eliminar el superhéroe:", error);  // Agregar un console.error
         res.status(500).send('Error al eliminar el superhéroe');
