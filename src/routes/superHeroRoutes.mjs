@@ -59,6 +59,7 @@ router.delete('/heroes/:id/delete',
     eliminarSuperheroeController
 );
 
+
 // FORMULARIO ACTUALIZAR SUPERHÉROE
 router.get('/heroes/:id/edit', validarObjectId(), mostrarFormularioActualizarSuperheroeController);
 

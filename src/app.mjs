@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import methodOverride from 'method-override';  // Importa method-override
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -14,6 +15,9 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Usar method-override para permitir el método DELETE en formularios
+app.use(methodOverride('_method'));  // Esta línea es la clave
 
 connectDB();
 
