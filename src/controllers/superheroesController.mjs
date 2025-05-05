@@ -97,39 +97,41 @@ export async function mostrarFormularioEliminarSuperheroeController(req, res) {
 
 
 // -------- CRUD ----------
-
-    export async function crearSuperheroeController(req, res) {
-        try {
-            const { nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poder, aliado, enemigo, creador } = req.body;
-            const superheroeCreado = await crearSuperheroe({
-                nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poder, aliado, enemigo, creador
-            });
-    
-            if (!superheroeCreado) {
-                return res.status(400).send({ message: 'Error al crear superhéroe' });
-            }
-    
-            res.status(201).send({ message: 'Superhéroe creado exitosamente' });
-        } catch (error) {
-            res.status(500).send({ message: 'Error al crear superhéroe', error: error.message });
-        }
-    }
-    
-// Actualizar Superhéroe.
-export async function actualizarSuperheroeController(req, res) {
+export async function crearSuperheroeController(req, res) {
     try {
-        const { id } = req.params;
-        let { nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poder, aliado, enemigo, creador } = req.body;
-        const datosActualizados = { nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poder, aliado, enemigo, creador };
-        const superheroeActualizado = await actualizarSuperheroe(id, datosActualizados);
-        if (!superheroeActualizado) {
-            return res.status(404).send({ message: 'Superhéroe no encontrado' });
+        const { nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poder, aliado, enemigo, creador } = req.body;
+        const superheroeCreado = await crearSuperheroe({
+            nombreSuperheroe, nombreReal, edad, planetaOrigen, debilidad, poder, aliado, enemigo, creador
+        });
+
+        if (!superheroeCreado) {
+            return res.status(400).render("mensaje", { mensaje: "Error al crear superhéroe" });
         }
-        res.status(200).send({ message: 'Superhéroe actualizado exitosamente' });
+
+        res.render("mensaje", { mensaje: "Superhéroe creado exitosamente" });
     } catch (error) {
-        res.status(500).send({ message: 'Error al actualizar superhéroe', error: error.message });
+        res.status(500).render("mensaje", { mensaje: `Error al crear superhéroe: ${error.message}` });
     }
 }
+
+    
+// Actualizar Superhéroe.
+export async function eliminarSuperheroeController(req, res) {
+    try {
+        const { id } = req.params;
+        const superheroeEliminado = await eliminarSuperheroe(id);
+
+        if (!superheroeEliminado) {
+            return res.status(404).render("mensaje", { mensaje: "Superhéroe no encontrado" });
+        }
+
+        res.render("mensaje", { mensaje: "Superhéroe eliminado exitosamente" });
+    } catch (error) {
+        res.status(500).render("mensaje", { mensaje: `Error al eliminar superhéroe: ${error.message}` });
+    }
+}
+
+
 
 
 export async function eliminarSuperheroeController(req, res) {
