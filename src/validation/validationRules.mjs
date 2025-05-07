@@ -16,12 +16,21 @@ const validarSuperheroe = [
         .notEmpty().withMessage('El planeta de origen es obligatorio'),
     body('debilidad')
         .notEmpty().withMessage('La debilidad es obligatoria'),
-    body('poder')
-        .isArray().withMessage('El poder debe ser un arreglo')
-        .custom((arr) => arr.every(item => typeof item === 'string')).withMessage('El poder debe ser un arreglo de cadenas de texto')
-        .custom((arr) => arr.every(item => item.trim().length >= 3)).withMessage('Cada elemento del poder debe tener al menos 3 caracteres')
-        .custom((arr) => arr.every(item => item.trim().length <= 60)).withMessage('Cada elemento del poder no debe exceder los 60 caracteres')
-        .customSanitizer((arr) => Array.isArray(arr) ? arr.map(item => item.trim()) : []),
+        body('poder')
+        .trim()
+        .customSanitizer((value) => {
+          if (typeof value === 'string') {
+            return value
+              .split(',')
+              .map(v => v.trim())
+              .filter(v => v.length > 0);
+          }
+          return [];
+        })
+        .isArray({ min: 1 }).withMessage('Debes ingresar al menos un poder')
+        .custom((arr) => arr.every(p => typeof p === 'string')).withMessage('Cada poder debe ser texto')
+        .custom((arr) => arr.every(p => p.length >= 3)).withMessage('Cada poder debe tener al menos 3 caracteres')
+        .custom((arr) => arr.every(p => p.length <= 60)).withMessage('Cada poder no debe exceder los 60 caracteres'),
     body('aliado')
         .notEmpty().withMessage('El aliado es obligatorio'),
     body('enemigo')

@@ -14,19 +14,41 @@ export const validarObjectId = (paramName = 'id') => (req, res, next) => {
     }
     next();
 }
+export function validarSuperheroe(req, res, next) {
+    const errors = [];
 
-// Validaciones de Errores.
+    if (!req.body.nombreSuperheroe || req.body.nombreSuperheroe.length < 3) {
+        errors.push({ msg: 'El nombre del superhéroe debe tener al menos 3 caracteres.' });
+    }
+
+    if (!req.body.poder || req.body.poder.length < 3) {
+        errors.push({ msg: 'El poder debe tener al menos 3 caracteres.' });
+    }
+
+    // Validar otros campos si es necesario...
+
+    if (errors.length > 0) {
+        return res.render('superheroe/edit', { title: 'Editar Superhéroe', superheroe: req.body, errors });
+    }
+
+    next();
+}
 export const manejarErroresValidacion = (view = null) => (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
         console.log('Errores de validación:', errors.array());
         if (view) {
-            return res.status(400).render(view, {errors: errors.array()});
+            return res.status(400).render(view, {
+                title: 'Editar Superhéroe',
+                superheroe: { ...req.body, _id: req.params.id }, // asegura que tenga el _id
+                errors: errors.array()
+            });
         }
         return res.status(400).json({ errors: errors.array() });
     }
     next();
-}
+};
+
 // Validación Personalizada por Atributo en el Body para Eliminar.
 export const validarAtributosEliminar = (req, res, next) => {
     const { nombreSuperheroe, nombreReal } = req.body;

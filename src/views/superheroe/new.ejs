@@ -24,9 +24,9 @@
     
         <label>Debilidad:</label>
         <input type="text" name="debilidad" required>
-    
-        <label for="poder">Poder</label>
-        <textarea id="poder" name="poder[]" required></textarea>
+
+        <label>Poder:</label>
+        <textarea name="poder" required></textarea>
 
         <label>Aliado:</label>
         <input type="text" name="aliado" required>
@@ -43,3 +43,13 @@
     <a href="/api/heroes" class="button">Volver al Dashboard</a> <br>
 </body>
 </html>
+
+
+
+<% if (errors && errors.length > 0) { %>
+  <ul class="errores">
+    <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+<% } %>

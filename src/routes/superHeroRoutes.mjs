@@ -34,12 +34,19 @@ router.get('/dashboard', async (req, res) => {
 });
 
 
+
 // -------------------------------
 // FORMULARIO CREAR SUPERHÉROE
 router.get('/heroes/new', mostrarFormularioCrearSuperheroeController);
 
 // CREAR SUPERHÉROE
-router.post('/heroes', crearSuperheroeController);
+router.post(
+    '/heroes',
+    validarSuperheroe,
+    manejarErroresValidacion('superheroe/new'),
+    crearSuperheroeController
+  );
+  
 
 // FORMULARIO ELIMINAR SUPERHÉROE POR ATRIBUTO
 router.get("/heroes/deleteAttribute", mostrarFormularioEliminarSuperheroeController);
@@ -59,20 +66,28 @@ router.delete('/heroes/:id/delete',
     eliminarSuperheroeController
 );
 
+// Ruta para mostrar el formulario de edición
+router.get(
+    '/heroes/:id/edit',
+    validarObjectId(), // Valida el ObjectId
+    mostrarFormularioActualizarSuperheroeController
+  );
 
-// FORMULARIO ACTUALIZAR SUPERHÉROE
-router.get('/heroes/:id/edit', validarObjectId(), mostrarFormularioActualizarSuperheroeController);
-
-// ACTUALIZAR SUPERHÉROE
+  
+/* // Ruta para procesar la actualización
 router.post('/heroes/:id',
-    (req, res, next) => {
-        console.log('Middleware validarObjectId ejecutado');
-        next();
-    },
     validarObjectId(),
-    validarSuperheroe,
+    validarSuperheroe, manejarErroresValidacion('superheroe/edit'),
     actualizarSuperheroeController
-);
+); */
+
+router.post(
+    '/heroes/:id',
+    validarSuperheroe,
+    manejarErroresValidacion('superheroe/edit'),
+    actualizarSuperheroeController
+  );
+  
 
 //endpoint para mostrar Pagina Principal
 router.get('/home',homeController);
