@@ -19,17 +19,17 @@ import {
 
 
 // -------- GET ----------
-
 export async function obtenerSuperheroePorIdController(req, res) {
     const { id } = req.params;
     const superheroe = await obtenerSuperheroePorId(id);
 
-    if (superheroe) {
+    if (superheroe && superheroe.tipo === 'superheroe') {
         res.render('dashboard', { superheroes: [renderizarSuperheroe(superheroe)] });
     } else {
         res.status(404).send({ mensaje: "Superhéroe no encontrado" });
     }
 }
+
 
 export async function obtenerTodosLosSuperheroesController(req, res) {
     const superheroes = await obtenerTodosLosSuperheroes();
